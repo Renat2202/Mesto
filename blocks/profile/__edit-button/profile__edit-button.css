@@ -1,0 +1,17 @@
+.profile__edit-button {
+    cursor: pointer;
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    margin-left: 18px;
+    background-image: url(../../../images/profile-edit-button.svg);
+    background-repeat: no-repeat;
+    background-color: transparent;
+    background-position: center;
+    background-size: cover;
+    border: none;
+}
+
+.profile__edit-button:focus {
+    outline: none;
+}
