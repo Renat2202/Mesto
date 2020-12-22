@@ -5,7 +5,7 @@
 @import url(../blocks/body/body.css);
 @import url(../blocks/page/page.css);
 
-
+@import url(../blocks/hovered/hovered.css);
 
 @import url(../blocks/header/header.css);
 @import url(../blocks/header/__logo/header__logo.css);
@@ -20,4 +20,12 @@
 
 @import url(../blocks/elements/elements.css);
 @import url(../blocks/element/element.css);
+@import url(../blocks/element/__image/element__image.css);
+@import url(../blocks/element/__caption/element__caption.css);
+@import url(../blocks/element/__title/element__title.css);
+@import url(../blocks/element/__like/element__like-button.css);
+
+
+
 @import url(../blocks/footer/footer.css);
+@import url(../blocks/footer/__copyright/footer__copyright.css);
