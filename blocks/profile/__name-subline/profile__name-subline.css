@@ -5,3 +5,16 @@
     font-size: 18px;
     line-height: 22px;
 }
+
+@media screen and (max-width: 656px) {
+    .profile__name-subline {
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .profile__name-subline {
+        font-size: 14px;
+        line-height: 17px;
+    }
+}

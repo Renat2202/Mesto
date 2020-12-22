@@ -7,3 +7,19 @@
     grid-column-gap: 17px;
     grid-row-gap: 20px;
 }
+
+@media screen and (max-width: 915px) {
+    .elements {
+        grid-template-rows: repeat(3, 1fr);
+        grid-template-columns: repeat(2, 282px);
+        margin: 51px auto 0;
+        justify-content: center;    
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .elements {
+        grid-template-rows: repeat(6, 1fr);
+        grid-template-columns: repeat(1, 282px);  
+    }
+}
