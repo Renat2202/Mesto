@@ -6,6 +6,17 @@
 @import url(../blocks/page/page.css);
 
 @import url(../blocks/hovered/hovered.css);
+@import url(../blocks/hidden/hidden.css);
+
+
+@import url(../blocks/edit-form/edit-form.css);
+@import url(../blocks/edit-form/__close-button/edit-form__close-button.css);
+@import url(../blocks/edit-form/__window/edit-form__window.css);
+@import url(../blocks/edit-form/__title/edit-form__title.css);
+@import url(../blocks/edit-form/__field-name/edit-form__field-name.css);
+@import url(../blocks/edit-form/__field-subline/edit-form__field-subline.css);
+
+@import url(../blocks/edit-form/__button/edit-form__button.css);
 
 @import url(../blocks/header/header.css);
 @import url(../blocks/header/__logo/header__logo.css);

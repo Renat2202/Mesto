@@ -1,0 +1,14 @@
+.edit-form__field-name {
+    margin: 0;
+    padding-bottom: 13px;
+
+    border: none;
+    border-bottom: 1px solid #00000033;
+
+    font-size: 14px;
+    line-height: 17px;
+}
+
+.edit-form__field-name:focus {
+    outline: none;
+}
