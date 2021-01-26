@@ -10,6 +10,7 @@
     background-position: center;
     background-size: cover;
     border: none;
+    vertical-align: super;
 }
 
 .profile__edit-button:focus {

@@ -7,15 +7,35 @@
     <title>Mesto</title>
 </head>
 <body class="body">
-    <div class="edit-form hidden">
-        <div class="edit-form__window">
-            <button class="edit-form__close-button hovered"></button>
-            <h2 class="edit-form__title">Редактировать профиль</h2>
-            <input class="edit-form__field-name" id="edit-form__field-name" type="text">
-            <input class="edit-form__field-subline" id="edit-form__field-subline" type="text">
-            <button class="edit-form__button">Сохранить</button>
-        </div>
-    </div>
+
+    <section class="popup popup_edit-form">
+        <form class="popup__window popup__window_edit-form" method="GET" name="editForm">
+            <button type="button" class="popup__close-button popup__close-button_edit-form hovered" aria-label="Закрыть"></button>
+            <h2 class="popup__title">Редактировать профиль</h2>
+            <input class="popup__field popup__field_name" name="name" type="text" placeholder="Имя пользователя" required>
+            <input class="popup__field popup__field_subline" name="subline" type="text" placeholder="О себе" required>
+            <button type="submit" class="popup__button">Сохранить</button>
+        </form>
+    </section>
+
+    <section class="popup popup_item-form">
+        <form class="popup__window popup__window_item-form" method="GET" name="itemForm">
+            <button type="button" class="popup__close-button popup__close-button_item-form hovered" aria-label="Закрыть"></button>
+            <h2 class="popup__title">Новое место</h2>
+            <input class="popup__field popup__field_title" name="title" type="text" placeholder="Название" required>
+            <input class="popup__field popup__field_url" name="link" type="url" placeholder="Ссылка на картинку" required>
+            <button type="submit" class="popup__button">Создать</button>
+        </form>
+    </section>
+    
+    <section class="popup popup_image-popup">
+        <figure class="popup__figure">
+            <button type="button" class="popup__close-button popup__close-button_image-popup hovered"></button>
+            <img class="popup__image" src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg" alt="Архыз">
+            <figcaption class="popup__caption">Архыз</figcaption>
+        </figure>
+    </section>
+
     <div class="page">
         <header class="header">
             <img class="header__logo" src="./images/header-logo.svg" alt="Место">
@@ -24,63 +44,33 @@
             <section class="profile">
                 <img class="profile__avatar" src="./images/profile-avatar.jpg" alt="Аватар">
                 <div class="profile__info">
-                    <div>
-                        <h1 class="profile__name">Жак-Ив Кусто</h1>
-                        <button class="profile__edit-button hovered"></button>
-                    </div>
+                    <h1 class="profile__name">Жак-Ив Кусто</h1>
+                    <button class="profile__edit-button hovered" aria-label="Редактировать профиль"></button>
                     <p class="profile__name-subline">Исследователь океана</p>
                 </div>
-                <button class="profile__button hovered"></button>
+                <button class="profile__button hovered" aria-label="Добавить новый элемент"></button>
             </section>
             <section class="elements">
-                <div class="element">  
-                    <img class="element__image" src="./images/element-moscow.jpg" alt="Москва">
-                    <div class="element__caption">    
-                        <h2 class="element__title">Москва</h2>
-                        <button class="element__like-button hovered"></button>
-                    </div>
-                </div>
-                <div class="element">
-                    <img class="element__image" src="./images/element-smolensk.jpg" alt="Смоленск">
-                    <div class="element__caption">
-                        <h2 class="element__title">Смоленск</h2>
-                        <button class="element__like-button hovered"></button>
-                    </div>
-                </div>
-                <div class="element">
-                    <img class="element__image" src="./images/element-kamchatka.jpg" alt="Камчатка">
-                    <div class="element__caption">
-                        <h2 class="element__title">Камчатка</h2>
-                        <button class="element__like-button hovered"></button>
-                    </div>
-                </div>
-                <div class="element">
-                    <img class="element__image" src="./images/element-elbrus.jpg" alt="Гора Эльбрус">
-                    <div class="element__caption">
-                        <h2 class="element__title">Гора Эльбрус</h2>
-                        <button class="element__like-button hovered"></button>
-                    </div>
-                </div>
-                <div class="element">
-                    <img class="element__image" src="./images/element-dombay.jpg" alt="Домбай">
-                    <div class="element__caption">
-                        <h2 class="element__title">Домбай</h2>
-                        <button class="element__like-button hovered"></button>
-                    </div>
-                </div>
-                <div class="element">
-                    <img class="element__image" src="./images/element-karachaevsk.jpg" alt="Карачаевск">
-                    <div class="element__caption">
-                        <h2 class="element__title">Карачаево-Черкесия</h2>
-                        <button class="element__like-button hovered"></button>
-                    </div>
-                </div>
+
             </section>
         </main>
         <footer class="footer">
             <span class="footer__copyright">&copy; 2020 Mesto Russia</span>     
         </footer>
     </div>
+
+    <template class="element-template">
+        <div class="element">
+            <button type="button" class="element__trash-button" aria-label="Удалить"></button>
+            <div class="element__image" style="background-image: url(&quot;https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg&quot;);"></div>
+            <div class="element__caption">
+                <h2 class="element__title">Архыз</h2>
+                <button type="button" class="element__like-button" aria-label="Поставить лайк"></button>
+            </div>
+        </div>
+    </template> 
+
+    <script src="./scripts/initial-cards.js"></script>
     <script src="./scripts/script.js"></script>
 </body>
 </html>

@@ -13,11 +13,16 @@
     
 }
 
+.element__like-button:hover {
+    opacity: .5;
+}
+
 .element__like-button:focus {
     outline: none;
 }
 
 .element__like-button:active {
     opacity: 1;
-    background-image: url(../../../images/element-like-button-active.svg);
+    /* background-image: url(../../../images/element-like-button-active.svg); */
 }
+

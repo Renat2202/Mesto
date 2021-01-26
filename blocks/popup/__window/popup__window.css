@@ -1,4 +1,4 @@
-.edit-form__window {
+.popup__window {
     box-sizing: border-box;
     position: absolute;
     top: 50%;
@@ -14,8 +14,8 @@
 }
 
 @media screen and (max-width: 520px) {
-    .edit-form__window {
-        top: 123px;
+    .popup__window  {
+        /* top: 122px; */
         padding: 0 22px;
         width: 282px;
         margin-left: -141px;
