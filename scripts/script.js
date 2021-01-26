@@ -64,7 +64,6 @@ function handleItemFormSubmit(evt) {
   evt.preventDefault();
   addCard(createCard(itemFormFieldName.value, itemFormFieldLink.value), elementsList);
   closePopup(itemForm);
-  
 }
 
 //Закрыть форму редактировния профиля
