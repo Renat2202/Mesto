@@ -30,8 +30,6 @@ const imagePopupCloseButton = document.querySelector('.popup__close-button_image
 
 const popupsList = document.querySelectorAll('.popup')//Список попапов
 
-let currentPopup;//Рткрытый попап
-
 
 //Закрыть попап
 function closePopup(popup) {
@@ -43,7 +41,7 @@ function closePopup(popup) {
 function clearError(popup) {
   const inputList = Array.from(popup.querySelectorAll('.popup__field'));
   inputList.forEach((inputElement) => {
-    hideInputError (popup, inputElement);
+    hideInputError (popup, inputElement, configValidation.inputErrorClass, configValidation.errorClass);
   });
 }
 
@@ -55,15 +53,11 @@ function openPopup(popup) {
   const inputList = Array.from(popup.querySelectorAll('.popup__field'));
   const popupButton = popup.querySelector('.popup__button');
   if (popupButton) {
-    toggleButtonState(inputList, popupButton);
+    toggleButtonState(inputList, popupButton, configValidation.inactiveButtonClass);
   }
 
-
   popup.classList.add('popup_opened');
-  
-  // console.log(Array.from(popup.querySelectorAll('.popup__field')));
-  // console.log(popup.querySelector('.popup__button'));
-  // console.log(hasInvalidInput(Array.from(popup.querySelectorAll('.popup__field'))));
+
 }
 
 //Открытие окна просмотра изображения 
@@ -162,8 +156,6 @@ initial();
 
 
 
-
-
 editFormCloseButton.addEventListener('click', function() {
   closePopup(editForm);
 });
@@ -203,8 +195,5 @@ popupsList.forEach(function(popup) {
       if (evt.target === evt.currentTarget) {
         closePopup(popup);
       }
-      console.log(evt.target);
-      console.log(evt.currentTarget);
-      console.log(evt.target === evt.currentTarget);
     });
 })
