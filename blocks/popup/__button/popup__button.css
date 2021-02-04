@@ -4,6 +4,7 @@
     margin-top: 48px;
     margin-bottom: 37px;
     padding: 14px 0 18px; 
+    box-sizing: border-box;
     border: none;
     border-radius: 2px;
     background-color: #000;

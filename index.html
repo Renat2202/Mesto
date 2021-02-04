@@ -9,22 +9,26 @@
 <body class="body">
 
     <section class="popup popup_edit-form">
-        <form class="popup__window popup__window_edit-form" method="GET" name="editForm">
+        <form class="popup__window popup__window_edit-form" method="GET" name="editForm" novalidate>
             <button type="button" class="popup__close-button popup__close-button_edit-form hovered" aria-label="Закрыть"></button>
             <h2 class="popup__title">Редактировать профиль</h2>
-            <input class="popup__field popup__field_name" name="name" type="text" placeholder="Имя пользователя" required>
-            <input class="popup__field popup__field_subline" name="subline" type="text" placeholder="О себе" required>
+            <input class="popup__field popup__field_name" name="name" id="name" type="text" placeholder="Имя пользователя" required minlength="2" maxlength="40">
+            <span id="name-error" class="popup__error"></span>
+            <input class="popup__field popup__field_subline" name="subline" id="subline" type="text" placeholder="О себе" required minlength="2" maxlength="200">
+            <span id="subline-error" class="popup__error"></span>
             <button type="submit" class="popup__button">Сохранить</button>
         </form>
     </section>
 
     <section class="popup popup_item-form">
-        <form class="popup__window popup__window_item-form" method="GET" name="itemForm">
+        <form class="popup__window popup__window_item-form" method="GET" name="itemForm" novalidate>
             <button type="button" class="popup__close-button popup__close-button_item-form hovered" aria-label="Закрыть"></button>
             <h2 class="popup__title">Новое место</h2>
-            <input class="popup__field popup__field_title" name="title" type="text" placeholder="Название" required>
-            <input class="popup__field popup__field_url" name="link" type="url" placeholder="Ссылка на картинку" required>
-            <button type="submit" class="popup__button">Создать</button>
+            <input class="popup__field popup__field_title" name="title" id="title" type="text" placeholder="Название" required minlength="2" maxlength="30">
+            <span id="title-error" class="popup__error"></span>
+            <input class="popup__field popup__field_url" name="link" id="link" type="url" placeholder="Ссылка на картинку" required>
+            <span id="link-error" class="popup__error"></span>
+            <button type="submit" class="popup__button" >Создать</button>
         </form>
     </section>
     
@@ -72,5 +76,7 @@
 
     <script src="./scripts/initial-cards.js"></script>
     <script src="./scripts/script.js"></script>
+    <script src="./scripts/validate.js"></script>
+    <!-- <script src="./scripts/script.js"></script> -->
 </body>
 </html>

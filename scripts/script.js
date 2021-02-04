@@ -28,15 +28,42 @@ const imagePopupImage = document.querySelector('.popup__image');//Окно по�
 const imagePopupCaption = document.querySelector('.popup__caption');//Подпись к картинке попапа
 const imagePopupCloseButton = document.querySelector('.popup__close-button_image-popup');//Кнопка закрытия попапа с картинокой
 
+const popupsList = document.querySelectorAll('.popup')//Список попапов
+
+let currentPopup;//Рткрытый попап
+
 
 //Закрыть попап
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
+  clearError(popup);
 }
 
+//Очистка ошибок
+function clearError(popup) {
+  const inputList = Array.from(popup.querySelectorAll('.popup__field'));
+  inputList.forEach((inputElement) => {
+    hideInputError (popup, inputElement);
+  });
+}
+
+
 //Открыть попап
-function openPopup (popup) {
+function openPopup(popup) {
+  currentPopup = popup;
+
+  const inputList = Array.from(popup.querySelectorAll('.popup__field'));
+  const popupButton = popup.querySelector('.popup__button');
+  if (popupButton) {
+    toggleButtonState(inputList, popupButton);
+  }
+
+
   popup.classList.add('popup_opened');
+  
+  // console.log(Array.from(popup.querySelectorAll('.popup__field')));
+  // console.log(popup.querySelector('.popup__button'));
+  // console.log(hasInvalidInput(Array.from(popup.querySelectorAll('.popup__field'))));
 }
 
 //Открытие окна просмотра изображения 
@@ -58,12 +85,19 @@ function addNewCard () {
   createCard(itemFormFieldName.value, itemFormFieldLink.value);
 }
 
-
 //"Отправка" формы создания нового элемента
 function handleItemFormSubmit(evt) {
   evt.preventDefault();
   addCard(createCard(itemFormFieldName.value, itemFormFieldLink.value), elementsList);
   closePopup(itemForm);
+}
+
+//"Отправка" формы редактирования профиля
+function handleEditFormSubmit (evt) {
+  evt.preventDefault();
+  profileName.textContent =  editFormFieldName.value;
+  profileSubline.textContent = editFormFieldSubline.value;
+  closePopup(editForm);
 }
 
 //Закрыть форму редактировния профиля
@@ -72,9 +106,9 @@ function closeForm () {
 }
 
 //Открыть форму редактировния профиля
-function openEditForm () {
-    openPopup(editForm);
+function openEditForm () { 
     getValues();
+    openPopup(editForm);
 }
 
 //Получение значений в форме редактировния профиля
@@ -82,16 +116,6 @@ function getValues () {
     editFormFieldName.value = profileName.textContent;
     editFormFieldSubline.value = profileSubline.textContent;
 }
-
-
-//"Отправка" формы редактирования профиля
-function handleEditFormSubmit (evt) {
-    evt.preventDefault();
-    profileName.textContent =  editFormFieldName.value;
-    profileSubline.textContent = editFormFieldSubline.value;
-    closePopup(editForm);
-}
-
 
 //Переключения лайка
 function toggleLike () {
@@ -137,13 +161,12 @@ function initial() {
 initial();
 
 
-profileEditButton.addEventListener('click', openEditForm);
+
+
 
 editFormCloseButton.addEventListener('click', function() {
   closePopup(editForm);
 });
-
-
 
 editFormWindow.onsubmit = handleEditFormSubmit;
 
@@ -160,6 +183,28 @@ imagePopupCloseButton.addEventListener('click', function() {
   closePopup(imagePopup);
 });
 
-
 itemFormWindow.onsubmit = handleItemFormSubmit;
 
+profileEditButton.addEventListener('click', openEditForm);//Открытие формы редактирования профиля
+
+//Закрытие попапа по кнопке Escape
+document.onkeydown = function(evt) {
+  if (evt.key == 'Escape') {
+    popupsList.forEach(function(popup) {
+      closePopup(popup);
+    });
+  }
+};
+
+
+//Закрытие попапа по клику на фоне
+popupsList.forEach(function(popup) {
+  popup.addEventListener('click', (evt) => {
+      if (evt.target === evt.currentTarget) {
+        closePopup(popup);
+      }
+      console.log(evt.target);
+      console.log(evt.currentTarget);
+      console.log(evt.target === evt.currentTarget);
+    });
+})
