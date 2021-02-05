@@ -35,6 +35,9 @@ const popupsList = document.querySelectorAll('.popup')//Список попап�
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
   clearError(popup);
+
+  document.removeEventListener('keydown', closePopupEscape);
+
 }
 
 //Очистка ошибок
@@ -57,6 +60,8 @@ function openPopup(popup) {
   }
 
   popup.classList.add('popup_opened');
+
+  document.addEventListener('keydown', closePopupEscape);
 
 }
 
@@ -179,14 +184,15 @@ itemFormWindow.onsubmit = handleItemFormSubmit;
 
 profileEditButton.addEventListener('click', openEditForm);//Открытие формы редактирования профиля
 
-//Закрытие попапа по кнопке Escape
-document.onkeydown = function(evt) {
-  if (evt.key == 'Escape') {
-    popupsList.forEach(function(popup) {
-      closePopup(popup);
-    });
+
+
+// Закрытие попапа по кнопке Escape
+function closePopupEscape (evt) {
+  let openedPopup = document.querySelector('.popup_opened');
+  if(evt.key === 'Escape') {
+    closePopup(openedPopup);
   }
-};
+}
 
 
 //Закрытие попапа по клику на фоне

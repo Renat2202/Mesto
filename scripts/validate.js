@@ -33,14 +33,6 @@ function checkInputValidity (formElement, inputElement, inputErrorClass, errorCl
   }
 };
 
-
-function checkButtons (inputList, buttonElement, openPopupButton) {
-  openPopupButton.onclick = function() {
-      toggleButtonState(inputList, buttonElement);
-  }
-}
-
-
 //Установка обработчиков событий
 function setEventListeners (formElement, inputSelector, submitButtonSelector, inactiveButtonClass, inputErrorClass, errorClass) {
   const inputList = Array.from(formElement.querySelectorAll(inputSelector));
