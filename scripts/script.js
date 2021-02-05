@@ -185,7 +185,6 @@ itemFormWindow.onsubmit = handleItemFormSubmit;
 profileEditButton.addEventListener('click', openEditForm);//Открытие формы редактирования профиля
 
 
-
 // Закрытие попапа по кнопке Escape
 function closePopupEscape (evt) {
   let openedPopup = document.querySelector('.popup_opened');
@@ -195,11 +194,14 @@ function closePopupEscape (evt) {
 }
 
 
-//Закрытие попапа по клику на фоне
+// Закрытие попапа по клику на фоне
 popupsList.forEach(function(popup) {
   popup.addEventListener('click', (evt) => {
       if (evt.target === evt.currentTarget) {
         closePopup(popup);
       }
+      
     });
 })
+
+

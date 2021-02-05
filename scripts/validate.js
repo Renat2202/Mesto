@@ -7,6 +7,8 @@ const configValidation = {
   errorClass: 'popup__error_active'
 }
 
+
+
 //Показать ошибку поля ввода
 function showInputError (formElement, inputElement, errorMessage, inputErrorClass, errorClass) {
   const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
@@ -34,7 +36,7 @@ function checkInputValidity (formElement, inputElement, inputErrorClass, errorCl
 };
 
 //Установка обработчиков событий
-function setEventListeners (formElement, inputSelector, submitButtonSelector, inactiveButtonClass, inputErrorClass, errorClass) {
+function setEventListeners (formElement, {inputSelector, submitButtonSelector, inactiveButtonClass, inputErrorClass, errorClass}) {
   const inputList = Array.from(formElement.querySelectorAll(inputSelector));
   const buttonElement = formElement.querySelector(submitButtonSelector);
 
@@ -47,18 +49,16 @@ function setEventListeners (formElement, inputSelector, submitButtonSelector, in
   });
 };
 
-
 //Включение валидации
-function enableValidation({formSelector, inputSelector, submitButtonSelector, inactiveButtonClass, inputErrorClass, errorClass})  {
+function enableValidation ({formSelector, ...rest}) {
   const formList = Array.from(document.querySelectorAll(formSelector));
   formList.forEach((formElement) => {
     formElement.addEventListener('submit', function (evt) {
       evt.preventDefault();
     });
-    setEventListeners(formElement, inputSelector, submitButtonSelector, inactiveButtonClass, inputErrorClass, errorClass);
+    setEventListeners(formElement, {...rest});
   });
 };
-
 
 //Проверка всех полей на валидность
 function hasInvalidInput(inputList) {
