@@ -30,6 +30,66 @@ const imagePopupCloseButton = document.querySelector('.popup__close-button_image
 
 const popupsList = document.querySelectorAll('.popup')//Список попапов
 
+class Card {
+  constructor(name, link) {
+    this._name = name;
+    this._link = link;
+  }
+  
+  
+  generateCard(){
+    this._element = this._getTemplate();
+    this._setEventListners();  
+
+    this._element.querySelector('.element__image').style.backgroundImage = `url(${this._link})`;
+    this._element.querySelector('.element__title').textContent = this._name;
+
+    return this._element;
+  }
+
+  _showImagePopup() {
+    imagePopup.classList.add('popup_opened');
+    imagePopup.querySelector('.popup__image').setAttribute('src', this._link);
+    imagePopup.querySelector('.popup__image').setAttribute('alt', this._name);
+    imagePopup.querySelector('.popup__caption').textContent = this._name;
+  }
+
+  _handleLikeCard() {
+    this._element.querySelector('.element__like-button').classList.toggle('element__like-button_active');
+  }
+
+  _handleDeleteCard() {
+    this._element.remove();
+  }
+
+_setEventListners() {
+  this._element.querySelector('.element__image').addEventListener('click', () => {
+    this._showImagePopup();
+  });
+
+  this._element.querySelector('.element__like-button').addEventListener('click', () => {
+    this._handleLikeCard();
+  })
+
+  this._element.querySelector('.element__trash-button').addEventListener('click', () => {
+    this._handleDeleteCard();
+  })
+}
+  
+  _getTemplate() {
+    const cardElement = document
+      .querySelector('.element-template')
+      .content
+      .querySelector('.element')
+      .cloneNode(true);
+
+    
+    return cardElement;
+  }
+
+}
+
+
 
 //Закрыть попап
 function closePopup(popup) {
@@ -65,29 +125,23 @@ function openPopup(popup) {
 
 }
 
-//Открытие окна просмотра изображения 
-function showImagePopup(caption, src) {
-  openPopup(imagePopup);
-  imagePopupImage.setAttribute('src', src);
-  imagePopupImage.setAttribute('alt', caption);
-  imagePopupCaption.textContent = caption;
-}
-
 //Открытие формы добаления нового элемента
 function showItemForm () {
   itemFormWindow.reset();
   openPopup(itemForm);
 }
 
-//Добавление нового элемента
-function addNewCard () {
-  createCard(itemFormFieldName.value, itemFormFieldLink.value);
-}
+
 
 //"Отправка" формы создания нового элемента
 function handleItemFormSubmit(evt) {
   evt.preventDefault();
-  addCard(createCard(itemFormFieldName.value, itemFormFieldLink.value), elementsList);
+
+  const item = new Card(itemFormFieldName.value, itemFormFieldLink.value);
+  const itemElement = item.generateCard();
+
+  document.querySelector('.elements').prepend(itemElement);
+
   closePopup(itemForm);
 }
 
@@ -116,42 +170,13 @@ function getValues () {
     editFormFieldSubline.value = profileSubline.textContent;
 }
 
-//Переключения лайка
-function toggleLike () {
-  this.classList.toggle('element__like-button_active');
-}
-
-//Удаление карточки
-function deleteCard () {
-  this.closest('.element').remove();
-}
-
-function createCard(name, link) {
-    const newCard = tmpl.content.cloneNode(true);
-    newCard.querySelector('.element__image').style.backgroundImage = `url(${link})`;
-    newCard.querySelector('.element__title').textContent = name;
-
-    newCard.querySelector('.element__trash-button').onclick = deleteCard;
-
-    newCard.querySelector('.element__like-button').onclick = toggleLike; 
-
-    newCard.querySelector('.element__image').addEventListener('click', function(){
-      showImagePopup(name, link);
-    });
-    
-    return newCard;
-}
-
-
-function addCard(card, container) {
-  container.prepend(card);
-}
-
-
 //Инициализация карточек
 function initial() {
     initialCards.forEach(function(card) {
-      addCard(createCard(card.name, card.link), elementsList);
+      // addCard(createCard(card.name, card.link), elementsList);
+      const item = new Card(card.name, card.link);
+      const itemElement = item.generateCard();
+      document.querySelector('.elements').appendChild(itemElement);
     });
 }
 
