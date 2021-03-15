@@ -17,14 +17,6 @@ export class Card {
     return this._element;
   }
 
-  // _showImagePopup() {
-  //   const imagePopup = document.querySelector(".popup_image-popup");
-  //   imagePopup.classList.add("popup_opened");
-  //   imagePopup.querySelector(".popup__image").setAttribute("src", this._link);
-  //   imagePopup.querySelector(".popup__image").setAttribute("alt", this._name);
-  //   imagePopup.querySelector(".popup__caption").textContent = this._name;
-  // }
-
   _handleLikeCard() {
     this._element
       .querySelector(".element__like-button")
@@ -34,18 +26,6 @@ export class Card {
   _handleDeleteCard() {
     this._element.remove();
   }
-
-  // _closePopupEscape() {
-  //   function closeImagePopup(evt) {
-  //     let openedPopup = document.querySelector(".popup_opened");
-  //     if (evt.key === "Escape") {
-  //       document.removeEventListener("keydown", closeImagePopup);
-  //       openedPopup.classList.remove("popup_opened");
-  //     }
-  //   }
-
-  //   document.addEventListener("keydown", closeImagePopup);
-  // }
 
   _setEventListners() {
     this._element
