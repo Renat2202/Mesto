@@ -1,5 +1,8 @@
 import { Card } from "./Card.js";
 import { FormValidator, configValidation } from "./FormValidator.js";
+import { Popup } from "./Popup.js";
+import { PopupWithImage } from "./PopupWithImage.js";
+import { Section } from "./Section.js";
 
 const editForm = document.querySelector(".popup_edit-form"); //Обертка формы редактирования профиля
 const editFormWindow = document.querySelector(".popup__window_edit-form"); //Форма редактирования профиля
@@ -30,7 +33,7 @@ const itemFormCloseButton = document.querySelector(
   ".popup__close-button_item-form"
 ); //Кнопка закрытия попапа добалния нового элемента
 
-const imagePopup = document.querySelector(".popup_image-popup"); //Попап с картинокой
+let imagePopup = document.querySelector(".popup_image-popup"); //Попап с картинокой
 const imagePopupImage = document.querySelector(".popup__image"); //Окно попапа с картинокой
 const imagePopupCaption = document.querySelector(".popup__caption"); //Подпись к картинке попапа
 const imagePopupCloseButton = document.querySelector(
@@ -85,14 +88,16 @@ const popupsList = document.querySelectorAll(".popup"); //Список попа�
 
 //Закрыть попап
 function closePopup(popup) {
-  popup.classList.remove("popup_opened");
   const popupField = popup.querySelector(".popup__field");
   let popupForm = popup.querySelector(".popup__window");
   popupForm = new FormValidator(configValidation, popupForm);
   if (popupField) {
     popupForm.clearError();
   }
-  document.removeEventListener("keydown", closePopupEscape);
+
+  popup = new Popup(popup);
+  popup.close();
+  
 }
 
 //Открыть попап
@@ -104,9 +109,10 @@ function openPopup(popup) {
     popupForm.toggleButtonState();
   }
 
-  popup.classList.add("popup_opened");
+  popup = new Popup(popup);
+  popup.open();
+  popup.setEventListners();
 
-  document.addEventListener("keydown", closePopupEscape);
 }
 
 //Открытие формы добаления нового элемента
@@ -151,6 +157,8 @@ function closeForm() {
 function openEditForm() {
   getValues();
   openPopup(editForm);
+  // let editFor = new Popup(".popup_edit-form");
+  // editFor.open();
 }
 
 //Получение значений в форме редактировния профиля
@@ -160,7 +168,7 @@ function getValues() {
 }
 
 //Открытия попапа с изображением
-function showImagePopup(name, link) {
+export function showImagePopup(name, link) {
   imagePopup.classList.add("popup_opened");
   imagePopupImage.setAttribute("src", link);
   imagePopupImage.setAttribute("alt", name);
@@ -168,36 +176,67 @@ function showImagePopup(name, link) {
 }
 
 //Инициализация карточек
-function initial() {
-  initialCards.forEach(function (card) {
-    const item = new Card(card.name, card.link, () => {
-      showImagePopup(card.name, card.link);
-      handlePopupEscape();
+// export function initial() {
+//   initialCards.forEach(function (card) {
+//     const item = new Card(card.name, card.link, () => {
+//       showImagePopup(card.name, card.link);
+//       handlePopupEscape();
+//     });
+//     const itemElement = item.generateCard();
+//     elementsList.prepend(itemElement);
+//   });
+// }
+
+const cardsList = new Section({
+  items: initialCards,
+  renderer: () => {
+    initialCards.forEach(item => {
+        const card = new Card(item.name, item.link, () => {
+          // showImagePopup(item.name, item.link);
+
+          imagePopup = new PopupWithImage(imagePopup);
+          imagePopup.open(item.name, item.link);
+          imagePopup.setEventListners();
+          
+
+
+          // handlePopupEscape();
+        });
+        const itemElement = card.generateCard();
+        cardsList.addItem(itemElement);
     });
-    const itemElement = item.generateCard();
-    elementsList.prepend(itemElement);
-  });
-}
+  }
+  ,}, '.elements');
+
+  cardsList.initial();
 
 //Отрисовка карточек
-initial();
+// initial();
 
-editFormCloseButton.addEventListener("click", function () {
-  closePopup(editForm);
-});
+
+
+
+//Обработчик кнопок закрытия попап'ов
+
+// editFormCloseButton.addEventListener("click", function () {
+//   closePopup(editForm);
+// });
+
+// itemFormCloseButton.addEventListener("click", function () {
+//   closePopup(itemForm);
+// });
+
+// imagePopupCloseButton.addEventListener("click", function () {
+//   closePopup(imagePopup);
+// });
 
 editFormWindow.onsubmit = handleEditFormSubmit;
 
 addProfileButton.addEventListener("click", showItemForm);
 
-itemFormCloseButton.addEventListener("click", function () {
-  closePopup(itemForm);
-});
 
-//Обработчик кнопок закрытия попап'ов
-imagePopupCloseButton.addEventListener("click", function () {
-  closePopup(imagePopup);
-});
+
+
 
 itemFormWindow.onsubmit = handleItemFormSubmit;
 
@@ -212,7 +251,7 @@ function closePopupEscape(evt) {
 }
 
 //Добавление обработчика закрытия попапа по кнопке Escape
-function handlePopupEscape() {
+export function handlePopupEscape() {
   document.addEventListener("keydown", closePopupEscape);
 }
 
