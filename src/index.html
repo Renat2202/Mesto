@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="pages/index.css">
     <title>Mesto</title>
 </head>
 <body class="body">
@@ -42,11 +41,11 @@
 
     <div class="page">
         <header class="header">
-            <img class="header__logo" src="./images/header-logo.svg" alt="Место">
+            <img class="header__logo" src="<%=require('./images/header-logo.svg')%>" alt="Место">
         </header>
         <main class="content">
             <section class="profile">
-                <img class="profile__avatar" src="./images/profile-avatar.jpg" alt="Аватар">
+                <img class="profile__avatar" src="<%=require('./images/profile-avatar.jpg')%>" alt="Аватар">
                 <div class="profile__info">
                     <h1 class="profile__name">Жак-Ив Кусто</h1>
                     <button class="profile__edit-button hovered" aria-label="Редактировать профиль"></button>
@@ -74,9 +73,5 @@
         </div>
     </template> 
 
-    <script src="./scripts/initial-cards.js"></script>
-    <script type="module" src="./scripts/index.js"></script>
-    <!-- <script src="./scripts/validate.js"></script> -->
-    <!-- <script src="./scripts/script.js"></script> -->
 </body>
 </html>

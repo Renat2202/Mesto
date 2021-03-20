@@ -1,10 +1,13 @@
-import { Card } from "./Card.js";
-import { FormValidator, configValidation } from "./FormValidator.js";
-import { Popup } from './Popup.js'
-import { PopupWithForm } from "./PopupWithForm.js";
-import { PopupWithImage } from "./PopupWithImage.js";
-import { Section } from "./Section.js";
-import { UserInfo } from "./UserInfo.js";
+import './index.css';
+
+import { initialCards } from "../scripts/initial-cards.js";
+import { Card } from "../scripts/Card.js";
+import { FormValidator, configValidation } from "../scripts/FormValidator.js";
+import { Popup } from '../scripts/Popup.js'
+import { PopupWithForm } from "../scripts/PopupWithForm.js";
+import { PopupWithImage } from "../scripts/PopupWithImage.js";
+import { Section } from "../scripts/Section.js";
+import { UserInfo } from "../scripts/UserInfo.js";
 
 const editForm = document.querySelector(".popup_edit-form"); //Обертка формы редактирования профиля
 const editFormWindow = document.querySelector(".popup__window_edit-form"); //Форма редактирования профиля
@@ -86,33 +89,6 @@ function showItemForm() {
   openPopup(itemForm);
 }
 
-//"Отправка" формы создания нового элемента
-function handleItemFormSubmit(evt) {
-  evt.preventDefault();
-
-  const item = new Card(
-    itemFormFieldName.value,
-    itemFormFieldLink.value,
-    () => {
-          
-          let popupWithImage = new PopupWithImage(imagePopup);
-          popupWithImage.open(itemFormFieldName.value, itemFormFieldLink.value);
-          popupWithImage.setEventListners();
-
-    }
-  );
-  const itemElement = item.generateCard();
-
-  elementsList.prepend(itemElement);
-
-  closePopup(itemForm);
-}
-
-
-//Закрыть форму редактировния профиля
-function closeForm() {
-  editForm.classList.remove("popup_opened");
-}
 
 //Открыть форму редактировния профиля
 function openEditForm() {
@@ -125,14 +101,6 @@ function getValues() {
   const profile = user.getUserInfo();
   editFormFieldName.value = profile.name;
   editFormFieldSubline.value = profile.subline;
-}
-
-//Открытия попапа с изображением
-function showImagePopup(name, link) {
-  imagePopup.classList.add("popup_opened");
-  imagePopupImage.setAttribute("src", link);
-  imagePopupImage.setAttribute("alt", name);
-  imagePopupCaption.textContent = name;
 }
 
 
