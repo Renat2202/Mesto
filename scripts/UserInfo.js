@@ -15,6 +15,6 @@ export class UserInfo {
 
     setUserInfo(userInfo) {
         this._userNameSelector.textContent = userInfo.name;
-        this._userNameSelector.textContent = userInfo.subline;
+        this._userSublineSelector.textContent = userInfo.subline;
     }
  } 

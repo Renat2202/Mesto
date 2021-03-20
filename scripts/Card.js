@@ -1,8 +1,8 @@
 export class Card {
-  constructor(name, link, openCard) {
+  constructor(name, link, handleCardClick) {
     this._name = name;
     this._link = link;
-    this._openCard = openCard;
+    this._handleCardClick = handleCardClick;
   }
 
   generateCard() {
@@ -31,7 +31,7 @@ export class Card {
     this._element
       .querySelector(".element__image")
       .addEventListener("click", () => {
-        this._openCard();
+        this._handleCardClick();
       });
 
     this._element
