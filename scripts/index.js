@@ -1,6 +1,7 @@
 import { Card } from "./Card.js";
 import { FormValidator, configValidation } from "./FormValidator.js";
 import { Popup } from './Popup.js'
+import { PopupWithForm } from "./PopupWithForm.js";
 import { PopupWithImage } from "./PopupWithImage.js";
 import { Section } from "./Section.js";
 
@@ -219,6 +220,10 @@ function showImagePopup(name, link) {
 // });
 
 editFormWindow.onsubmit = handleEditFormSubmit;
+let editWindow = new PopupWithForm(editFormWindow, (item) => {
+  
+})
+
 
 addProfileButton.addEventListener("click", showItemForm);
 
